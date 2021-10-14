@@ -20,9 +20,15 @@ public class Regex {
     public static void main(String[] args) {
         Pattern basePat = Pattern.compile("([(]?)([0-9]{3})([)]?)([-|.| ]?)"
                 + "([0-9]{3})([.|-])([0-9]{4})");
-        String phoneNum = "419-123-4567";
         
-        System.out.println(validateNum(phoneNum, basePat));
+        System.out.println(validateNum("(419)123-4567", basePat));
+        System.out.println(validateNum("(419) 123-4567", basePat));
+        System.out.println(validateNum("419-123-4567", basePat));
+        System.out.println(validateNum("419.123.4567", basePat));
+        System.out.println(validateNum("419_123_4567", basePat));
+        System.out.println(validateNum("(419)123-456", basePat));
+        System.out.println(validateNum("4191234567", basePat));
+        System.out.println(validateNum("419123456", basePat));
     }
     
     static String validateNum(String phoneNumber, Pattern basePattern)
@@ -39,7 +45,8 @@ public class Regex {
         }
         else
         {
-            resultNum = "This is not a valid phone number format.";
+            resultNum = "This is not a valid phone number format and can not be"
+                    + " accepted.";
         }
         
         return resultNum;
